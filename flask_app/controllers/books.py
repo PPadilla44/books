@@ -19,7 +19,7 @@ def book_fave(bookid):
     data = {
         'id': bookid
     }
-    return render_template("book_fave.html", book=Book.get_book_by_id_with_authors(data), all_authors=Author.get_all())
+    return render_template("book_fave.html", book=Book.get_book_by_id_with_authors(data), all_authors=Author.find_authors(data))
 
 @app.route('/books/<bookid>/addfave', methods=['POST'])
 def add_fave_book(bookid):

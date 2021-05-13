@@ -21,9 +21,9 @@ def create_author():
 @app.route('/authors/<author_id>')
 def author_fave(author_id):
     data = {
-        'id': author_id
+        'id': author_id,  
     }
-    return render_template("author_fave.html", author=Author.get_author_by_id_with_books(data), all_books=Book.get_all())
+    return render_template("author_fave.html", author=Author.get_author_by_id_with_books(data), all_books=Book.find_books(data))
 
 @app.route('/authors/<authorid>/addfave',methods=['POST'])
 def add_fave(authorid):

@@ -34,7 +34,8 @@ class Author:
         from flask_app.models.book import Book
         query = "SELECT * FROM authors JOIN favorites on \
         authors.id = favorites.author_id JOIN books on \
-        books.id = favorites.books_id WHERE authors.id = %(id)s GROUP BY books.id;"
+        books.id = favorites.books_id WHERE authors.id = %(id)s \
+        GROUP BY books.id;"
         resutls = connectToMySQL('books_schema').query_db(query,data)
         if resutls: 
             author = cls(resutls[0])
@@ -51,6 +52,13 @@ class Author:
             author = Author.get_by_id(data)
         return author
     
+    @classmethod
+    def find_authors(cls,data):
+        query = "SELECT * FROM authors WHERE id NOT IN \
+        (SELECT author_id FROM favorites WHERE books_id = %(id)s);"
+        results = connectToMySQL('books_schema').query_db(query,data)
+        return results
+
     @classmethod
     def add_fave(cls,data):
         query = "INSERT INTO favorites(author_id,books_id) \

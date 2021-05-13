@@ -56,3 +56,10 @@ class Book:
         query = "INSERT INTO favorites(author_id,books_id) \
         VALUES (%(authorid)s,%(bookid)s);"
         return connectToMySQL('books_schema').query_db(query,data)
+
+    @classmethod
+    def find_books(cls,data):
+        query = "SELECT * FROM books WHERE id NOT IN \
+        (SELECT books_id FROM favorites WHERE author_id = %(id)s);"
+        results = connectToMySQL('books_schema').query_db(query,data)
+        return results

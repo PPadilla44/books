@@ -35,9 +35,9 @@
                 <div class="mb-3 mt-3 d-flex justify-content-between" style="width: 400px;">
                     <label for="bookfave">Book:</label>
                     <select name="bookfave" style="width: 300px;" id="bookfave">
-                        {% for book in all_books %}
-                            <option value="{{book['id']}}">{{book['title']}}</option>
-                        {% endfor %}
+                            {% for book in all_books %}
+                                    <option value="{{book['id']}}">{{book['title']}}</option>
+                            {% endfor %}
                     </select>
                 </div>
                 <button style="position: relative; left: 100px;" class="btn btn-primary" type="submit">Add</button>
